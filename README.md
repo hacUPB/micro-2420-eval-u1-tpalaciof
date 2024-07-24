@@ -57,5 +57,17 @@
 ### Memory is an allocation of computer files from which specific operating instructions or other forms of digital information can be extracted and utilized. Memory usually takes the form of short-term storage for the files most often accessed during recent computer use. When a piece of data first enters an operating system (OS), it’s placed within that OS’s random-access memory (RAM).
 
 ## 7. Opcode 
-[Código de operación](https://es.wikipedia.org/wiki/C%C3%B3digo_de_operaci%C3%B3n)
+[Opcode: tomado de chatGPT](https://chatgpt.com/)
 ### En informática, un código de operación u opcode (acrónimo inglés de operation code) es la porción de una instrucción de lenguaje de máquina que especifica la operación a ser realizada. Su especificación y formato serán determinados por la arquitectura del conjunto de instrucciones (ISA) del componente de hardware de computador - normalmente un CPU, pero posiblemente una unidad más especializada.
+
+
+# Descripción
+
+En este modelo de computadora, encontramos 3 bloques principales: dos de memoria, separados, el ROM y la memoria; y la CPU. Además, se puede evidenciar, una señal de reloj con la frecuencia del procesador. 
+
+Dentro de la memoria ROM, en la cual se almacena el programa, podemos encontrar dos registros: el registro A, encarcado de mostrarnos la dirección donde se tiene que buscar la instrucción; y el registro D, encargado de recuperar el dato de la instrucción. 
+
+Por otro lado, la otra memoria, guarda los datos con los que se va operar. 
+
+La CPU, es el cerebro del computador, y es el encargado de encontrar la instrucción y desarrollarla. 
+
