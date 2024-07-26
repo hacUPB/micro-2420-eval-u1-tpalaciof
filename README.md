@@ -83,3 +83,20 @@ Por otro lado, la otra memoria, guarda los datos con los que se va operar.
 
 La CPU, es el cerebro del computador, y es el encargado de encontrar la instrucción y desarrollarla. 
 
+# Punto 4
+Esa instrucción manda a que se busque en la RAM el 16384, y se quedé concentrado en esa dirección, pero sin aún mandarla al registro D, pues esto no se ha pedido. 
+
+Fetch: va y busca la instrucción , en la dirección que le mande el pc
+
+Decode: decodifica, es decir, ve que tipo de operacion tiene que realizar, es tipo A o tipo C? y las manda a las compuertas correspondientes para luego ser ejecutadas. 
+
+# Instrucciones tipo A y C
+Instrucciones tipo A: Estas instrucciones SIEMPRE hacen lo mismo: almacenan en el circuito de la CPU los 15 bits menos significativos de la instrucción. ¿En dónde se almacenan esos bits?, en una memoria interna de la CPU llamada REGISTRO A.
+
+Instrucciones tipo C: son instrucciones cuyo bit de mayor peso es 1.
+Con este tipo de instrucciones se pueden realizar 3 cosas: operaciones, indicar un destino, y saltos.
+
+En general una instrucción tipo C se representa en lenguaje ensamblador así:`destino=operación;salto`
+las instrucciones tipo C codifican MUCHAS funciones. Cada uno de los 16 bits de la instrucción tipo C sirve para indicar qué debe hacer la CPU. 
+las operaciones son muy variadas, desde invertir los bits del registro D y A, hasta realizar operaciones como D+, A-1, etc. 
+
