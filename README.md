@@ -99,3 +99,57 @@ Con este tipo de instrucciones se pueden realizar 3 cosas: operaciones, indicar 
 En general una instrucción tipo C se representa en lenguaje ensamblador así:`destino=operación;salto`
 las instrucciones tipo C codifican MUCHAS funciones. Cada uno de los 16 bits de la instrucción tipo C sirve para indicar qué debe hacer la CPU. 
 las operaciones son muy variadas, desde invertir los bits del registro D y A, hasta realizar operaciones como D+, A-1, etc. 
+
+
+# Notas
+
+le caben hasta un tamaño de 256. Sin embargo números permitidos se pueden rotar y quedar de mayor tamaño.
+----> 8 bits 
+máximo valor inmediato, que se utiliza con # antes ---> 8 bits = 256 
+
+lsr = logic shift right --> solo lo desplaza, sin importar el 1 o 0 de negativo o positivo. llena de ceros lo que está a la derecha. 
+lsl = logic shift left
+
+asr = aritmetic shift right --> tiene en cuenta el signo del númemro que está rotando
+asl = aritmetic shift left
+
+ror = aparte que lo desplaza a la derecha, lo que se bota lo pasa al principio 
+
+movs = lo unico adicional aparte de mover, es que me actualiza el registro de estado
+
+Toca de por partes, para meterlo a un registro: 
+movw = mueve un numero de 16 bits directamente a la parte baja del registro seleccionado  ; 0x1234
+movt = mueve directamente un número de 16 bits a la parte baja de un registro : los 4 bytes más significativos; 0x5678
+
+Todas estas operaciones son de registros a registros. 
+
+
+str = guarda (store) en la RAM
+strb = del tamñado de un byte. lo que está en R2, guaárdelo en la direccion de la RAM de R0 (lo que aparezca en este registro) +4
+este más 4 es la siguiente direccion de memoria
+
+123 654
+donde cada 2, 00: 1
+
+strh = 16 bits
+
+origen [destino # más número a la dirección] ---> entre corchetes, direccion de la memoria RAM
+
+tamaños: 
+word = 32 bits
+halfword = 16 bits 
+
+ldr  = lee un dato de un registro y lo guarda en algun otro registro, más unval
+se necesita usa esta funcion cuando son con variables creadas que son muy grandes
+ejemplo: 
+
+// Definición de constantes usando .equ
+.equ BASE_ADDRESS, 0x20000000
+.equ VALUE1, 10
+.equ VALUE2, 20
+
+_start:
+    // Inicialización de registros usando las constantes definidas
+    LDR R0, =BASE_ADDRESS   // R0 = Dirección base de la memoria
+    MOV R1, #VALUE1         // R1 = 10
+
