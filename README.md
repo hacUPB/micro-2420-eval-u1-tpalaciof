@@ -99,5 +99,3 @@ Con este tipo de instrucciones se pueden realizar 3 cosas: operaciones, indicar 
 En general una instrucción tipo C se representa en lenguaje ensamblador así:`destino=operación;salto`
 las instrucciones tipo C codifican MUCHAS funciones. Cada uno de los 16 bits de la instrucción tipo C sirve para indicar qué debe hacer la CPU. 
 las operaciones son muy variadas, desde invertir los bits del registro D y A, hasta realizar operaciones como D+, A-1, etc. 
-
-# Me gusta el pene
