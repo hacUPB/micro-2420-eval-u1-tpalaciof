@@ -1,8 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/EID3BRwM)
 
-# Unidad 1
+# Actividad 1
 
-## 1. CPU
+## 1. Investigar 
+### 1.1. CPU
 [Central processing unit](https://en.wikipedia.org/wiki/Central_processing_unit)
 
 is the most important processor in a given computer.Its electronic circuitry executes instructions of a computer program, such as arithmetic, logic, controlling, and input/output (I/O) operations.
@@ -11,12 +12,12 @@ is the most important processor in a given computer.Its electronic circuitry exe
 
 central processing unit (CPU) is the primary functional component of a computer. The CPU is an assemblage of electronic circuitry that run a computer’s operating system and apps and manage a variety of other computer operations. A CPU is, essentially, the active brain of the computer. The CPU is the invisible manager inside the computer where data input is transformed into information output. It stores and executes program instructions through its vast networks of circuitry.
 
-## 2. ALU
+### 1.2. ALU
 [What are the components in a CPU?](https://www.ibm.com/think/topics/central-processing-unit)
 
 The arithmetic/logic unit (ALU) handles all arithmetic operations and logical operations. Its math functionality is based on four types of operations (addition, subtraction, multiplication and division). Logical operations typically involve some type of comparison (such as of letters, numbers or special characters) that’s tied to a particular computer action.
 
-## 3. Registros
+### 1.3. Registros
 [Registros: tomado de chatGPT](https://chatgpt.com/)
 
 Los registros son elementos de almacenamiento de datos dentro de un procesador o una unidad de procesamiento central (CPU). Pueden clasificarse en dos categorías principales:
@@ -38,12 +39,12 @@ Este grupo incluye registros que desempeñan funciones específicas y críticas 
 
 Estos registros específicos son esenciales para el control del flujo de ejecución, la gestión de datos y la ejecución de instrucciones dentro de la CPU, asegurando que las operaciones se realicen de manera eficiente y ordenada.
 
-## 4. Unidad de control 
+### 1.4. Unidad de control 
 [Guiding concepts: Data storage and memory](https://www.ibm.com/think/topics/central-processing-unit)
 
 The control unit of the CPU houses circuitry that guides the computer system through a system of electrical pulses and notifies it to execute high-level computer instructions. But despite its name, the control unit itself doesn’t control individual apps or programs; instead, it assigns those tasks as a human manager assigns particular jobs to different workers.
 
-## 5. Buses de datos y de dirección 
+### 1.5. Buses de datos y de dirección 
 
 [Bus de Datos y de Dirección: tomado de chatGPT](https://chatgpt.com/)
 
@@ -63,18 +64,18 @@ La cantidad de líneas del bus de dirección determina la cantidad de direccione
 
 En resumen, mientras que el bus de datos se encarga de transferir los datos entre los componentes del sistema, el bus de dirección se utiliza para especificar la ubicación específica de memoria o de dispositivos a los que se desea acceder. Ambos buses son esenciales para el funcionamiento adecuado y eficiente de un sistema informático, permitiendo la comunicación y la gestión de datos de manera coordinada y rápida.
 
-## 6. Memoria
+### 1.6. Memoria
 [Guiding concepts: Data storage and memory](https://www.ibm.com/think/topics/central-processing-unit)
 
 Memory is an allocation of computer files from which specific operating instructions or other forms of digital information can be extracted and utilized. Memory usually takes the form of short-term storage for the files most often accessed during recent computer use. When a piece of data first enters an operating system (OS), it’s placed within that OS’s random-access memory (RAM).
 
-## 7. Opcode 
+### 1.7. Opcode 
 [Opcode: tomado de chatGPT](https://chatgpt.com/)
 
 En informática, un código de operación u opcode (acrónimo inglés de operation code) es la porción de una instrucción de lenguaje de máquina que especifica la operación a ser realizada. Su especificación y formato serán determinados por la arquitectura del conjunto de instrucciones (ISA) del componente de hardware de computador - normalmente un CPU, pero posiblemente una unidad más especializada.
 
 
-## Descripción
+## 2. Descripción
 
 En este modelo de computadora, encontramos 3 bloques principales: dos de memoria, separados, el ROM y la memoria; y la CPU. Además, se puede evidenciar, una señal de reloj con la frecuencia del procesador. 
 
@@ -84,14 +85,15 @@ Por otro lado, la otra memoria, guarda los datos con los que se va operar.
 
 La CPU, es el cerebro del computador, y es el encargado de encontrar la instrucción y desarrollarla. 
 
-## Punto 4
-Esa instrucción manda a que se busque en la RAM el 16384, y se quedé concentrado en esa dirección, pero sin aún mandarla al registro D, pues esto no se ha pedido. 
+## 4. Fetch, Decode, Execute
 
 Fetch: va y busca la instrucción , en la dirección que le mande el pc
 
-Decode: decodifica, es decir, ve que tipo de operacion tiene que realizar, es tipo A o tipo C? y las manda a las compuertas correspondientes para luego ser ejecutadas. 
+Decode: decodifica, es decir, ve que tipo de operacion tiene que realizar, ¿es tipo A o tipo C? y le manda los bits a las compuertas correspondientes para luego ser ejecutadas. 
 
-## Instrucciones tipo A y C
+execute: ejecuta la orden
+
+## 5 y 6. Instrucciones tipo A y C
 Instrucciones tipo A: Estas instrucciones SIEMPRE hacen lo mismo: almacenan en el circuito de la CPU los 15 bits menos significativos de la instrucción. ¿En dónde se almacenan esos bits?, en una memoria interna de la CPU llamada REGISTRO A.
 
 Instrucciones tipo C: son instrucciones cuyo bit de mayor peso es 1.
@@ -100,6 +102,14 @@ Con este tipo de instrucciones se pueden realizar 3 cosas: operaciones, indicar 
 En general una instrucción tipo C se representa en lenguaje ensamblador así:`destino=operación;salto`
 las instrucciones tipo C codifican MUCHAS funciones. Cada uno de los 16 bits de la instrucción tipo C sirve para indicar qué debe hacer la CPU. 
 las operaciones son muy variadas, desde invertir los bits del registro D y A, hasta realizar operaciones como D+, A-1, etc. 
+
+## 7. Compuertas lógicas de la CPU
+
+los tres primers bits determinan si es una instrucción tipo A o tipo C, si es tipo A, su dígito más significativo empieza por 0, y si es tipo C, la instrucción empieza en 111. Por lo tanto se utiliza una compuerta lógica negadora NOT, para verificar este dígito más significativo. ¿Es tipo A? entonces pasa a ser un 1 ya se sabe que es tipo A y se acaba la operación. Con los otros 2 dígitos más significativos se hace un sistema de dos compuertas AND, que verifican si son 1 o 0; si efectivamente, son 1, y el dígito más significativo también lo es, entonces se sabe que es una instrucción tipo C. 
+
+## 9. 
+
+# Actividad 2 
 
 
 ## Notas
