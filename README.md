@@ -135,8 +135,9 @@ Para mostrar mejor las direcciones que corresponden a cada segmento de memoria, 
 ![Direcciones de Memoria](image-1.png)
 
 Para los perifércos: 
-![Direcciones Periféricos](image-2.png)
 ![Direcciones periféricos](image-3.png)
+![Direcciones Periféricos](image-2.png)
+
 
 * ***Clocks* y *Timers***: además cuenta con los siguientes *clocks* y *timers*: 
 
