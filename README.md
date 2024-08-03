@@ -124,8 +124,18 @@ Tipo de Arquitectura:
 
 * **Arquitectura**: La arquitectura del ESP32 es una variante de la arquitectura Harvard, ya que tiene buses separados para instrucciones y datos, pero permite que el procesador acceda a la memoria de datos desde el espacio de direcciones de instrucciones y viceversa, lo que añade flexibilidad.
 
-* **Procesador y Núcleos**: El ESP32 cuenta con procesadores Xtensa® single-/dual-core 32-bit LX6 microprocessor(s) y 3 nucleos: 1 nucleo a 1 a 240 MHz: 504.85 CoreMark; 2.10 CoreMark/MHz. Y dos núcleos a 240 MHz: 994.26 CoreMark; 4.14 CoreMark/MHz
+* **Procesador y Núcleos**: El ESP32 cuenta con procesadores Xtensa® single-/dual-core 32-bit LX6 microprocessor(s) y 3 nucleos: 1 nucleo a 1 a 240 MHz: 504.85 CoreMark; 2.10 CoreMark/MHz. Y dos núcleos a 240 MHz: 994.26 CoreMark; 4.14 CoreMark/MHz.
 
+* ***Clocks* y *Timers***: además cuenta con los siguientes *clocks* y *timers*: 
+
+    * Internal 8 MHz oscillator with calibration
+    * Internal RC oscillator with calibration
+    * External 2 MHz ~ 60 MHz crystal oscillator (40 MHz only for Wi-Fi/Bluetooth functionality)
+    * External 32 kHz crystal oscillator for RTC with calibration
+    * Two timer groups, including 2 × 64-bit timers and 1 × main watchdog in each group
+    * One RTC timer
+    * RTC watchdog
+    
 * **Memoria**: El ESP32 tiene un mapa de memoria dividido en varias regiones para instrucciones y datos. Posee una memoria ROM de 448 KB, una SRAM de 520 KB y 16 kB  SRAM en RTC. 
 
 
@@ -137,17 +147,6 @@ Para mostrar mejor las direcciones que corresponden a cada segmento de memoria, 
 Para los perifércos: 
 ![Direcciones periféricos](image-3.png)
 ![Direcciones Periféricos](image-2.png)
-
-
-* ***Clocks* y *Timers***: además cuenta con los siguientes *clocks* y *timers*: 
-
-    • Internal 8 MHz oscillator with calibration
-    • Internal RC oscillator with calibration
-    • External 2 MHz ~ 60 MHz crystal oscillator (40 MHz only for Wi-Fi/Bluetooth functionality)
-    • External 32 kHz crystal oscillator for RTC with calibration
-    • Two timer groups, including 2 × 64-bit timers and 1 × main watchdog in each group
-    • One RTC timer
-    • RTC watchdog
 
 ## 3. Comparación de microprocesadores
 
@@ -171,33 +170,27 @@ Complejidad
 
 Para **ADD**: 
 
-|--------------------------------|----------------------------|--------------------------------|------------------------------|
 | **Procesadores**               | **Longitud**               | **Ciclos de Reloj**            | **Complejidad**              |
 |--------------------------------|----------------------------|--------------------------------|------------------------------|
 | Intel Core i9-11900K (x86-64)  | 1-4 bytes                  | 1 ciclo                        | Baja                         |
 | AMD Ryzen 9 5900X              | 1-4 bytes                  | 1 ciclo (mejor de los casos)   | Baja                         |
 | Apple M1                       | 4 bytes (RISC)             | 1 ciclo (mejor de los casos)   | Baja                         |
-|--------------------------------|----------------------------|--------------------------------|------------------------------|
 
 Para **MUL**: 
 
-|--------------------------------|----------------------------|--------------------------------|------------------------------|
 | **Procesadores**               | **Longitud**               | **Ciclos de Reloj**            | **Complejidad**              |
 |--------------------------------|----------------------------|--------------------------------|------------------------------|
 | Intel Core i9-11900K (x86-64)  | 2-4 bytes                  | 3-4 ciclos (mejor de los casos)| Moderada                     |
 | AMD Ryzen 9 5900X              | 2-4 bytes                  | 3-4 ciclos (mejor de los casos)| Moderada                     |
 | Apple M1                       | 4 bytes (RISC)             | 3 ciclos (mejor de los casos)  | Moderada                     |
-|--------------------------------|----------------------------|--------------------------------|------------------------------|
 
 Para **MOV**: 
 
-|--------------------------------|----------------------------|--------------------------------|------------------------------|
 | **Procesadores**               | **Longitud**               | **Ciclos de Reloj**            | **Complejidad**              |
 |--------------------------------|----------------------------|--------------------------------|------------------------------|
 | Intel Core i9-11900K (x86-64)  | 1-5 bytes                  | 1 ciclo (mejor de los casos)   | Baja                         |
 | AMD Ryzen 9 5900X              | 1-5 bytes                  | 1 ciclo (mejor de los casos)   | Baja                         |
 | Apple M1                       | 4 bytes (RISC)             | 1 ciclo (mejor de los casos)   | Baja                         |
-|--------------------------------|----------------------------|--------------------------------|------------------------------|
 
 ## Concluciones: 
 ### Longitud de las Instrucciones:
