@@ -107,9 +107,117 @@ las operaciones son muy variadas, desde invertir los bits del registro D y A, ha
 
 los tres primers bits determinan si es una instrucción tipo A o tipo C, si es tipo A, su dígito más significativo empieza por 0, y si es tipo C, la instrucción empieza en 111. Por lo tanto se utiliza una compuerta lógica negadora NOT, para verificar este dígito más significativo. ¿Es tipo A? entonces pasa a ser un 1 ya se sabe que es tipo A y se acaba la operación. Con los otros 2 dígitos más significativos se hace un sistema de dos compuertas AND, que verifican si son 1 o 0; si efectivamente, son 1, y el dígito más significativo también lo es, entonces se sabe que es una instrucción tipo C. 
 
-## 9. 
+## 9. Programa en Assembler
+
+Básicamente la función de este código en Assembler, es crear un contador, sirviéndose de los registros A y D. cuando tiene el símbolo @ quiere decir que se está actuando con el registro A. Mientras que cuando el código nos muestra "D =", evidentemente, está actuando para el registro D. El contador de nuestro programa será "i", que será constantemente guardado dentro de un sumador "sum", que a su vez, no puede ser mayor a 100. Siempre que esto se cumple, se va guardando "i" en "sum ", y vuelve iniciar un ciclo gracias al salto JMP. Cuando por fin sum es mayor a 100 se detiene el programa. 
+
+los valores se van guardando en la memoria RAM, mientras que las instrucciones del programa están guardadas en la memoria ROM. El registro pc es el encargado de recorrer cada una de las ubicaciones donde están las instrucciones. Por ejemplo: pc = 2, nos muestra una ubicación en la ROM y la participación del registro pc en esta. 
 
 # Actividad 2 
+
+## 1.
+## 2. Procesador ESP32
+[esp32_datasheet_en.pdf](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
+
+
+Tipo de Arquitectura:
+
+* **Arquitectura**: La arquitectura del ESP32 es una variante de la arquitectura Harvard, ya que tiene buses separados para instrucciones y datos, pero permite que el procesador acceda a la memoria de datos desde el espacio de direcciones de instrucciones y viceversa, lo que añade flexibilidad.
+
+* **Procesador y Núcleos**: El ESP32 cuenta con procesadores Xtensa® single-/dual-core 32-bit LX6 microprocessor(s) y 3 nucleos: 1 nucleo a 1 a 240 MHz: 504.85 CoreMark; 2.10 CoreMark/MHz. Y dos núcleos a 240 MHz: 994.26 CoreMark; 4.14 CoreMark/MHz
+
+* **Memoria**: El ESP32 tiene un mapa de memoria dividido en varias regiones para instrucciones y datos. Posee una memoria ROM de 448 KB, una SRAM de 520 KB y 16 kB  SRAM en RTC. 
+
+
+![Mapa de Memoria](image.png)
+Para mostrar mejor las direcciones que corresponden a cada segmento de memoria, me valdré de una tabla presentada en el datasheet del ESP32: 
+
+![Direcciones de Memoria](image-1.png)
+
+Para los perifércos: 
+![Direcciones Periféricos](image-2.png)
+![Direcciones periféricos](image-3.png)
+
+* ***Clocks* y *Timers***: además cuenta con los siguientes *clocks* y *timers*: 
+
+    • Internal 8 MHz oscillator with calibration
+    • Internal RC oscillator with calibration
+    • External 2 MHz ~ 60 MHz crystal oscillator (40 MHz only for Wi-Fi/Bluetooth functionality)
+    • External 32 kHz crystal oscillator for RTC with calibration
+    • Two timer groups, including 2 × 64-bit timers and 1 × main watchdog in each group
+    • One RTC timer
+    • RTC watchdog
+
+## 3. Comparación de microprocesadores
+
+Los microprocesadores utilizados serán: 
+
+Intel Core i9-11900K (x86-64)
+AMD Ryzen 9 5900X
+Apple M1
+
+Las instrucciones que compararemos son:
+
+ADD (suma)
+MUL (multiplicación)
+MOV (carga de datos desde memoria)
+
+Y los parámetros que compararemos son: 
+
+Longitud
+Ciclos de reloj 
+Complejidad 
+
+Para **ADD**: 
+
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+| **Procesadores**               | **Longitud**               | **Ciclos de Reloj**            | **Complejidad**              |
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+| Intel Core i9-11900K (x86-64)  | 1-4 bytes                  | 1 ciclo                        | Baja                         |
+| AMD Ryzen 9 5900X              | 1-4 bytes                  | 1 ciclo (mejor de los casos)   | Baja                         |
+| Apple M1                       | 4 bytes (RISC)             | 1 ciclo (mejor de los casos)   | Baja                         |
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+
+Para **MUL**: 
+
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+| **Procesadores**               | **Longitud**               | **Ciclos de Reloj**            | **Complejidad**              |
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+| Intel Core i9-11900K (x86-64)  | 2-4 bytes                  | 3-4 ciclos (mejor de los casos)| Moderada                     |
+| AMD Ryzen 9 5900X              | 2-4 bytes                  | 3-4 ciclos (mejor de los casos)| Moderada                     |
+| Apple M1                       | 4 bytes (RISC)             | 3 ciclos (mejor de los casos)  | Moderada                     |
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+
+Para **MOV**: 
+
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+| **Procesadores**               | **Longitud**               | **Ciclos de Reloj**            | **Complejidad**              |
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+| Intel Core i9-11900K (x86-64)  | 1-5 bytes                  | 1 ciclo (mejor de los casos)   | Baja                         |
+| AMD Ryzen 9 5900X              | 1-5 bytes                  | 1 ciclo (mejor de los casos)   | Baja                         |
+| Apple M1                       | 4 bytes (RISC)             | 1 ciclo (mejor de los casos)   | Baja                         |
+|--------------------------------|----------------------------|--------------------------------|------------------------------|
+
+## Concluciones: 
+### Longitud de las Instrucciones:
+
+Intel y AMD: Las instrucciones pueden variar en longitud desde 1 a 5 bytes dependiendo de la instrucción específica y los operandos utilizados.
+Apple M1: Utiliza un conjunto de instrucciones RISC con un tamaño de instrucción fijo de 4 bytes, lo cual simplifica la decodificación pero puede hacer un uso menos eficiente del espacio de memoria.
+
+### Ciclos de Reloj:
+
+ADD: Todas las arquitecturas logran ejecutar esta instrucción en un ciclo de reloj en el mejor de los casos.
+MUL: Requiere más ciclos de reloj en todas las arquitecturas, con Intel y AMD típicamente tomando de 3 a 4 ciclos, mientras que el Apple M1 puede realizarla en 3 ciclos.
+MOV: Es una instrucción rápida que puede completarse en un ciclo de reloj en las tres arquitecturas.
+
+### Complejidad:
+
+Las instrucciones ADD y MOV tienen baja complejidad en todas las arquitecturas, mientras que MUL es más compleja debido al mayor número de ciclos necesarios para su ejecución.
+
+
+* Todas las arquitecturas son eficientes en la ejecución de instrucciones básicas como ADD y MOV, logrando completarlas en un solo ciclo de reloj.
+* Las instrucciones de longitud fija del Apple M1 (RISC) simplifican el diseño del decodificador y pueden mejorar la eficiencia, pero pueden resultar en una menor densidad de código en comparación con las instrucciones Intel y AMD (CISC).
+* En aplicaciones que dependen en gran medida de la multiplicación, las diferencias en los ciclos de reloj pueden tener un impacto notable, y el diseño eficiente de RISC de Apple podría proporcionar una ligera ventaja.
 
 
 ## Notas
