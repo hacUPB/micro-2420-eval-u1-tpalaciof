@@ -113,9 +113,23 @@ Básicamente la función de este código en Assembler, es crear un contador, sir
 
 los valores se van guardando en la memoria RAM, mientras que las instrucciones del programa están guardadas en la memoria ROM. El registro pc es el encargado de recorrer cada una de las ubicaciones donde están las instrucciones. Por ejemplo: pc = 2, nos muestra una ubicación en la ROM y la participación del registro pc en esta. 
 
+
+
+
 # Actividad 2 
 
 ## 1.
+
+- **Bus de Direcciones:** 
+- **Mapa de Memoria:** 
+- **Microprocesador 8086:** 
+- **Arquitectura de Von Neumann:** 
+- **Arquitectura de Harvard:** 
+- **Set de Instrucciones:**
+- **Arquitecturas CISC y RISC:**
+  - **CISC:** 
+  - **RISC:** 
+
 ## 2. Procesador ESP32
 [esp32_datasheet_en.pdf](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
 
@@ -135,7 +149,7 @@ Tipo de Arquitectura:
     * Two timer groups, including 2 × 64-bit timers and 1 × main watchdog in each group
     * One RTC timer
     * RTC watchdog
-    
+
 * **Memoria**: El ESP32 tiene un mapa de memoria dividido en varias regiones para instrucciones y datos. Posee una memoria ROM de 448 KB, una SRAM de 520 KB y 16 kB  SRAM en RTC. 
 
 
@@ -152,21 +166,21 @@ Para los perifércos:
 
 Los microprocesadores utilizados serán: 
 
-Intel Core i9-11900K (x86-64)
-AMD Ryzen 9 5900X
-Apple M1
+* Intel Core i9-11900K (x86-64)
+* AMD Ryzen 9 5900X
+* Apple M1
 
 Las instrucciones que compararemos son:
 
-ADD (suma)
-MUL (multiplicación)
-MOV (carga de datos desde memoria)
+* ADD (suma)
+* MUL (multiplicación)
+* MOV (carga de datos desde memoria)
 
 Y los parámetros que compararemos son: 
 
-Longitud
-Ciclos de reloj 
-Complejidad 
+* Longitud
+* Ciclos de reloj 
+* Complejidad 
 
 Para **ADD**: 
 
