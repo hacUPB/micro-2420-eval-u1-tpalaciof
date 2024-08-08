@@ -140,7 +140,8 @@ Hay diferentes tipos de instrucciones, estas son:
     * Instrucciones de Control de Flujo
     * Instrucciones de Manipulación de Bits
 
-cada una de estas instrucciones cuenta con ciertas características que las determinan: 
+    cada una de estas instrucciones cuenta con ciertas características que las determinan: 
+
     * **Sintaxis:** se refiere al formato y estructura con la cual se escribe la instrucción. Incluye las reglas y el orden en que se deben colocar los diferentes componentes de la instrucción, como el opcode y los operandos. La sintaxis determina cómo el ensamblador interpreta las instrucciones escritas por el programador.
     * **Opcode (código de operación):** es la parte de la instrucción que especifica la operación que se debe realizar.
     * **Tamaño**
@@ -191,7 +192,8 @@ Para mostrar mejor las direcciones que corresponden a cada segmento de memoria, 
 
 ![Direcciones de Memoria](image-1.png)
 
-Para los perifércos: 
+Para los perifércos:
+
 ![Direcciones periféricos](image-3.png)
 ![Direcciones Periféricos](image-2.png)
 
