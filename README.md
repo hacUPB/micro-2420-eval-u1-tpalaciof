@@ -135,33 +135,33 @@ Esto significa que el mapa de memoria es un espacio unificado que contiene tanto
 - **Set de Instrucciones:**
 es el conjunto completo de instrucciones que un procesador puede ejecutar. Estas instrucciones son comandos que le indican al procesador qué operaciones realizar, como mover datos, realizar cálculos aritméticos, o controlar el flujo del programa.
 Hay diferentes tipos de instrucciones, estas son: 
-* Instrucciones de Transferencia de Datos
-* Instrucciones Aritméticas y Lógicas
-* Instrucciones de Control de Flujo
-* Instrucciones de Manipulación de Bits
+    * Instrucciones de Transferencia de Datos
+    * Instrucciones Aritméticas y Lógicas
+    * Instrucciones de Control de Flujo
+    * Instrucciones de Manipulación de Bits
 
 cada una de estas instrucciones cuenta con ciertas características que las determinan: 
-* **Sintaxis:** se refiere al formato y estructura con la cual se escribe la instrucción. Incluye las reglas y el orden en que se deben colocar los diferentes componentes de la instrucción, como el opcode y los operandos. La sintaxis determina cómo el ensamblador interpreta las instrucciones escritas por el programador.
-* **Opcode (código de operación):** es la parte de la instrucción que especifica la operación que se debe realizar.
-* **Tamaño**
-* **Ciclos de Reloj**
+    * **Sintaxis:** se refiere al formato y estructura con la cual se escribe la instrucción. Incluye las reglas y el orden en que se deben colocar los diferentes componentes de la instrucción, como el opcode y los operandos. La sintaxis determina cómo el ensamblador interpreta las instrucciones escritas por el programador.
+    * **Opcode (código de operación):** es la parte de la instrucción que especifica la operación que se debe realizar.
+    * **Tamaño**
+    * **Ciclos de Reloj**
 
 - **Arquitecturas CISC y RISC:**
-  * **CISC:** La arquitectura CISC está diseñada para minimizar la cantidad de instrucciones por programa, sacrificando el número de ciclos de reloj por instrucción. Las instrucciones en CISC son complejas y pueden realizar múltiples operaciones de bajo nivel
-  **Características:**
+    * **CISC:** La arquitectura CISC está diseñada para minimizar la cantidad de instrucciones por programa, sacrificando el número de ciclos de reloj por instrucción. Las instrucciones en CISC son complejas y pueden realizar múltiples operaciones de bajo nivel
+    **Características:**
 
-    * **Instrucciones Complejas:** Pueden realizar múltiples tareas.
-    * **Decodificación Lenta:** Debido a la complejidad de las instrucciones, la decodificación es más lenta.
-    * **Tamaño de Instrucción Variable:** Las instrucciones pueden tener diferentes longitudes.
-    *  **Uso de Microprogramación:** Utiliza microcódigo para implementar instrucciones complejas.
+        * **Instrucciones Complejas:** Pueden realizar múltiples tareas.
+        * **Decodificación Lenta:** Debido a la complejidad de las instrucciones, la decodificación es más lenta.
+        * **Tamaño de Instrucción Variable:** Las instrucciones pueden tener diferentes longitudes.
+        *  **Uso de Microprogramación:** Utiliza microcódigo para implementar instrucciones complejas.
 
-  * **RISC:** se enfoca en simplificar las instrucciones, permitiendo que cada instrucción realice una sola operación de bajo nivel y se ejecute en un único ciclo de reloj. Esto permite una mayor velocidad de procesamiento y una mayor eficiencia.
-  **Características:**
+    * **RISC:** se enfoca en simplificar las instrucciones, permitiendo que cada instrucción realice una sola operación de bajo nivel y se ejecute en un único ciclo de reloj. Esto permite una mayor velocidad de procesamiento y una mayor eficiencia.
+    **Características:**
 
-    * **Instrucciones Simples:** Realizan una única tarea.
-    * **Decodificación Rápida:** Las instrucciones simples permiten una decodificación más rápida.
-    * **Tamaño de Instrucción Fijo:** Las instrucciones tienen un tamaño fijo, generalmente de 4 bytes.
-    * **Pipeline:** Facilita la implementación de pipelines de instrucción.
+        * **Instrucciones Simples:** Realizan una única tarea.
+        * **Decodificación Rápida:** Las instrucciones simples permiten una decodificación más rápida.
+        * **Tamaño de Instrucción Fijo:** Las instrucciones tienen un tamaño fijo, generalmente de 4 bytes.
+        * **Pipeline:** Facilita la implementación de pipelines de instrucción.
 
 ## 2. Procesador ESP32
 [esp32_datasheet_en.pdf](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
