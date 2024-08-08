@@ -120,15 +120,48 @@ los valores se van guardando en la memoria RAM, mientras que las instrucciones d
 
 ## 1.
 
-- **Bus de Direcciones:** 
-- **Mapa de Memoria:** 
-- **Microprocesador 8086:** 
-- **Arquitectura de Von Neumann:** 
-- **Arquitectura de Harvard:** 
+- **Mapa de Memoria:** representación completa de todas las direcciones que la unidad de control de la CPU puede generar para acceder a diferentes tipos de memoria y periféricos. El diseño del mapa de memoria es crucial para el funcionamiento eficiente del microprocesador o microcontrolador, ya que determina cómo y dónde se accede a la memoria y a los periféricos durante la operación del sistema.
+
+- **Bus de direcciones:** es un conjunto de líneas de comunicación que la CPU utiliza para enviar las direcciones de memoria. Cada línea del bus de direcciones representa un bit en la dirección de memoria. Por ejemplo, en la figura 1, se ilustra un bus de direcciones que va desde A0 hasta A15, lo que indica que el procesador puede generar direcciones de 16 bits 
+
+- **Microprocesador familia 8086:** El mapa de memoria del procesador 8086 de Intel está conformado por un espacio de direcciones de 20 bits (A0…A19), lo que permite acceder a un total de  1 MB (1024K unidades) de memoria. Cada una de estas unidades es de 16 bits, permitiendo una amplia capacidad de almacenamiento y manipulación de datos.
+En el 8086, las líneas de datos (D0…D7) y las líneas de direcciones (A0…A15) comparten los mismos pines, utilizando un bus de direcciones y datos multiplexado. Es decir, cuenta con una arquitectura tipo Von Neumann. Esta organización del bus de direcciones y datos multiplexado en el 8086 facilita la conexión de múltiples dispositivos y módulos de memoria, optimizando el uso de los recursos del sistema y permitiendo una arquitectura más eficiente y flexible.
+
+- **Arquitectura de Von Neumann:** En la arquitectura de Von Neumann, también conocida como arquitectura de almacenamiento de programas, tanto los datos como las instrucciones se almacenan en la misma memoria y se accede a ellos a través del mismo bus.
+Esto significa que el mapa de memoria es un espacio unificado que contiene tanto las instrucciones del programa como los datos manipulados por esas instrucciones. 
+
+- **Arquitectura de Harvard:** tiene una separación clara entre la memoria de instrucciones y la memoria de datos. Esto implica que las instrucciones y los datos se almacenan en memorias diferentes y se accede a ellas a través de buses separados.
+
 - **Set de Instrucciones:**
+es el conjunto completo de instrucciones que un procesador puede ejecutar. Estas instrucciones son comandos que le indican al procesador qué operaciones realizar, como mover datos, realizar cálculos aritméticos, o controlar el flujo del programa.
+Hay diferentes tipos de instrucciones, estas son: 
+* Instrucciones de Transferencia de Datos
+* Instrucciones Aritméticas y Lógicas
+* Instrucciones de Control de Flujo
+* Instrucciones de Manipulación de Bits
+
+cada una de estas instrucciones cuenta con ciertas características que las determinan: 
+* **Sintaxis:** se refiere al formato y estructura con la cual se escribe la instrucción. Incluye las reglas y el orden en que se deben colocar los diferentes componentes de la instrucción, como el opcode y los operandos. La sintaxis determina cómo el ensamblador interpreta las instrucciones escritas por el programador.
+* **Opcode (código de operación):** es la parte de la instrucción que especifica la operación que se debe realizar.
+* **Tamaño**
+* **Ciclos de Reloj**
+
 - **Arquitecturas CISC y RISC:**
-  - **CISC:** 
-  - **RISC:** 
+  * **CISC:** La arquitectura CISC está diseñada para minimizar la cantidad de instrucciones por programa, sacrificando el número de ciclos de reloj por instrucción. Las instrucciones en CISC son complejas y pueden realizar múltiples operaciones de bajo nivel
+  **Características:**
+
+    * **Instrucciones Complejas:** Pueden realizar múltiples tareas.
+    * **Decodificación Lenta:** Debido a la complejidad de las instrucciones, la decodificación es más lenta.
+    * **Tamaño de Instrucción Variable:** Las instrucciones pueden tener diferentes longitudes.
+    *  **Uso de Microprogramación:** Utiliza microcódigo para implementar instrucciones complejas.
+
+  * **RISC:** se enfoca en simplificar las instrucciones, permitiendo que cada instrucción realice una sola operación de bajo nivel y se ejecute en un único ciclo de reloj. Esto permite una mayor velocidad de procesamiento y una mayor eficiencia.
+  **Características:**
+
+    * **Instrucciones Simples:** Realizan una única tarea.
+    * **Decodificación Rápida:** Las instrucciones simples permiten una decodificación más rápida.
+    * **Tamaño de Instrucción Fijo:** Las instrucciones tienen un tamaño fijo, generalmente de 4 bytes.
+    * **Pipeline:** Facilita la implementación de pipelines de instrucción.
 
 ## 2. Procesador ESP32
 [esp32_datasheet_en.pdf](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
