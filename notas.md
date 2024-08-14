@@ -36,7 +36,7 @@ tamaños:
 word = 32 bits
 halfword = 16 bits 
 
-ldr  = lee un dato de un registro y lo guarda en algun otro registro, más unval
+ldr  = lee un dato de un registro y lo guarda en algun otro registro, más unval ---> ejem: Lo toma de la memoria y lo guarda
 
 MOV R3, #0x20000000 // R3 = Dirección base de la memoria
 
@@ -205,3 +205,142 @@ Procesador MK18F
 * Adress = base adress + 0h offset + (4d x i), where i = 0d to 34d
 
 * Todos los perifericos necesitan del clock para funcionar ---> el puerto también es un periférico
+
+## 14/08/2024
+/*********************************************************************
+*                    SEGGER Microcontroller GmbH                     *
+*                        The Embedded Experts                        *
+**********************************************************************
+*                                                                    *
+*            (c) 2014 - 2022 SEGGER Microcontroller GmbH             *
+*                                                                    *
+*       www.segger.com     Support: support@segger.com               *
+*                                                                    *
+**********************************************************************
+*                                                                    *
+* All rights reserved.                                               *
+*                                                                    *
+* Redistribution and use in source and binary forms, with or         *
+* without modification, are permitted provided that the following    *
+* condition is met:                                                  *
+*                                                                    *
+* - Redistributions of source code must retain the above copyright   *
+*   notice, this condition and the following disclaimer.             *
+*                                                                    *
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND             *
+* CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,        *
+* INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF           *
+* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE           *
+* DISCLAIMED. IN NO EVENT SHALL SEGGER Microcontroller BE LIABLE FOR *
+* ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR           *
+* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT  *
+* OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;    *
+* OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF      *
+* LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT          *
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE  *
+* USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH   *
+* DAMAGE.                                                            *
+*                                                                    *
+*********************************************************************/
+
+/*********************************************************************
+*
+*       _start
+*
+*  Function description
+*  Defines entry point for an MKE18F16 assembly code only
+*  application.
+*
+*  Additional information
+*    Please note, as this is an assembly code only project, the C/C++
+*    runtime library has not been initialised. So do not attempt to call
+*    any C/C++ library functions because they probably won't work.
+*/
+
+ .syntax unified
+ .global _start
+ .text
+
+ // -------------------------RELOJ PERIFÉRICOS----------------------
+ .equ    PCC_BASE, 0x40065000
+ .equ    PCC_PORTA_OFFSET, 0x124
+ .equ    PCC_PORTB_OFFSET, 0x128
+ .equ    PCC_CGC_BIT, 30
+
+ // -------------------DIRECCIONES DE LOS PUERTOS-------------------- 
+ //PTA 2: LED
+ .equ    PORTA_BASE, 0x40049000
+ .equ    PORTA_PCR2_OFFSET, 0x8
+
+ //PTB 9: Pulsador
+ .equ    PORTB_BASE, 0x4004A000
+ .equ    PORTB_PCR9_OFFSET, 0x24
+
+ // Activar el Mux
+ .equ   PORT_PCR_MUX_BITS, 0x8 //-->001---> 1 bit en el bit 8
+//Se pone un 1 en un registro y se mueve 8 veces a la izquierda
+
+// Address: Base address + 0h offset + (4d × i), where i=0d to 31d
+
+ .equ    GPIOD_BASE, 0x400FF0C0
+ .equ    GPIOD7_OFFSET, 7
+ .equ    GPIO_DDR, 0x14
+ .equ    GPIO_PDOR, 0x0
+ .equ    GPIO_PDIR, 0x10
+
+ .thumb_func
+
+_start:
+        bl  init_clks
+        bl  init_ports
+        bl  init_gpio
+loop:
+        adds    r0, r0, #1
+        b       loop
+
+init_clks:
+    ldr     r4, =#PCC_BASE
+    ldr     r5, =#PCC_PORTA_OFFSET
+    mov     r0, #1
+    lsl     r0, #PCC_CGC_BIT        //en el bit 30,lo activa
+    str     r0, [r4, r5]            // lo activa para el Puerto A
+    ldr     r5, =#PCC_PORTB_OFFSET  //offset del puerto B
+    str     r0, [r4, r5]            // lo activa para el puerto B
+    bx      lr                      // hace que el registro pc sea lr
+
+init_ports:
+    ldr     r4, =#PORTA_BASE    //toma de la memoria la direccion del puerto A base y lo guarda en el registro R4
+    mov     r0, #1              // agrega la constante en r0
+    lsl     r0, #PORT_PCR_MUX_BITS // mueve este 1, 8 veces a la izquierda
+    ldr     r5, =#PORTD_PCR7_OFFSET   
+    str     r0, [r4, r5]
+    ldr     r5, =#PORTD_PCR6_OFFSET
+    orr     r0, #3    //Como la mascara 10000011, agrega este 11 al final
+    str     r0, [r4, r5]  // pone el valor de r0 = 10000011 en PORTD_PCR6, activa el mux, el DS y el DE
+    bx      lr
+
+init_gpio:
+    ldr     r4, =#GPIOD_BASE
+    mov     r0, #1
+    lsl     r0, #GPIOD7_OFFSET  
+    ldr     r5, =#GPIO_DDR  // DDR: establece dicha posición como salida o entrada
+    ldr     r1, [r4, r5]  //[r4, r5] es la direccion del DDR, guarda lo que haya en esa direccion en r1
+    orr     r0, r1        //a esa dirección, establece como salida lo que invierte comparandolo con r0
+    str     r0, [r4, r5]  // guarda lo que quedo en r0, en la direccion del DDR
+    bx      lr
+
+    
+leer_pulsador:
+    ldr     r4, =#GPIOD_BASE
+    ldr     r0, [r4, #GPIO_PDIR]
+    lsr     r0, #GPIOD7_OFFSET
+    ands    r0, #1
+    bx      lr
+
+escribir_led:
+    ldr     r4, =#GPIOD_BASE
+    ldr     r1, [r4, #GPIO_PDOR]
+    lsl     r0, #GPIOD7_OFFSET
+    orr     r0, r1
+    str     r0, [r4, #GPIO_PDOR]
+    bx      lr
