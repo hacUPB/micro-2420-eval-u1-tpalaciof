@@ -160,7 +160,7 @@ _start:
 contador: 
 
 add R1,R1,#1
-STR R1, [R0],#4
+STR R1, [R0],#4 ---> a la direccion le suma el valor en cada loop
 adds R2, R2, #-1	// se tiene que poner la s para que sepa que la inmediatamente anterior es 0, si lo es 
 beq end
 b contador // si no es cero, vuelve a ejecutarse una vez más el ciclo
