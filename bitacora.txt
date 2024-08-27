@@ -70,3 +70,125 @@ fin_copia:
 
 
 # Ejercicio 3 
+
+10001111
+10001000
+10001000
+11111111
+00001001
+00001001
+00001001
+01111001
+
+.syntax unified
+.global _start
+.text
+
+.thumb_func
+_start:
+    bl  crear_tabla_leds
+    bx  lr
+
+crear_tabla_leds:
+    ldr   r4, =#0x20000000 // Dirección inicial de memoria para guardar la tabla
+    ldr   r1, =leds        // Dirección de la tabla en la memoria de programa
+    mov   r2, #8           // Tamaño de la matriz (filas)
+    mov   r3, #8           // Tamaño de la matriz (columnas)
+loop_filas:
+    ldrb  r0, [r1], #1     // Carga el byte actual de la tabla de LED
+    strb  r0, [r4], #1     // Guarda el byte en la dirección de memoria y avanza
+    subs  r3, r3, #1       // Decrementa el contador de columnas
+    bne   loop_filas       // Continúa el bucle si no se han procesado todas las columnas
+    bx    lr               // Retorna
+
+.section .rodata
+leds:
+    .byte 0b10001111 // Representación de la primera fila de LEDs
+    .byte 0b10001000 // Representación de la segunda fila de LEDs
+    .byte 0b10001000 // Representación de la tercera fila de LEDs
+    .byte 0b11111111 // Representación de la cuarta fila de LEDs
+    .byte 0b00001001 // Representación de la quinta fila de LEDs
+    .byte 0b00001001 // Representación de la sexta fila de LEDs
+    .byte 0b00001001 // Representación de la séptima fila de LEDs
+    .byte 0b01111001 // Representación de la octava fila de LEDs
+
+
+# ejercicio 4
+
+.syntax unified
+.global _start
+.text
+
+.equ v1, 0x20000100     //guarda direcciones
+.equ v2, 0x20000140
+.equ vRes, 0x20000200
+
+// Definición de los datos de entrada (vectores)
+lista1:
+.hword 1,2,3,4,0    //define una lista de media palabra --> 16 bits
+
+lista2:
+.hword 2,3,4,5,0
+
+.thumb_func
+_start:
+    bl    init      
+    bl    vector1  
+    bl    vector2   
+loop:
+    bl    mult_vect  
+    b     loop       
+
+// Función de inicialización
+init:
+  // Retorna, no hace nada
+  bx    lr
+
+vector1:
+  push  {lr}    //guarda lr en el stack 
+  ldr   r4, =#lista1    //guarda la direccion de la lista 1 en el registro r4
+  ldr   r5, =#v1    //guarda la direccion de v1 en r5
+  bl    loop_store
+  pop   {pc}
+
+vector2:
+  push  {lr}
+  ldr   r4, =#lista2
+  ldr   r5, =#v2
+  bl    loop_store
+  pop   {pc}
+
+loop_store:
+  ldrh  r0, [r4], #2    //carga la media palabra de la direccion r4 en ro y va sumando 2 en cada iteracion
+  cmp   r0, #0          //compara r0 con 0
+  beq   end_store       // si la comparacion dio 0, salta end store
+  strh  r0, [r5], #2    // si no dio 0, guarda la media palabra de r0 en la direccion guardada en r5 y suma 2 a esta cada iteracion
+  b     loop_store
+end_store:
+  // Retorna
+  bx    lr
+
+mult_vect:
+  ldr   r4, =#v1
+  ldr   r5, =#v2
+  ldr   r6, =#vRes
+  b     loop_mult
+
+loop_mult:
+  ldrh  r0, [r4], #2    //carga en r0 el vector 1
+  ldrh  r1, [r5], #2    // carga en r1 el vector 2
+  cmp   r0, #0          // compara si llego el 0 que indica que se acabaron las listas 
+  beq   end_mult
+  cmp   r1, #0
+  beq   end_mult
+  mul   r0, r1
+  str   r0, [r6], #4    //guarda el valor del resultado en la direccion del registro r6, vRes
+  b     loop_mult
+end_mult:
+  // Retorna
+  bx    lr
+
+  #ejercicio 5
+  las filas de cátodo común y las columnas ánodo común 
+
+  #ejercicio 6 
